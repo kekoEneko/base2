@@ -1,0 +1,4 @@
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+*/30 * * * * root { echo "sincro started at `date`" && cd /var/www/html/ && php artisan sync:erp && chown -R www-data:www-data storage/framework/cache/data && echo "sincro finished at `date`" && sed -i -e :a -e '$q;N;501,$D;ba' /var/log/cronjobs.log; } >> /var/log/cronjobs.log 2>&1
